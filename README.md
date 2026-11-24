@@ -2,6 +2,12 @@
 
 Compile Solid JSX with Rsbuild, use Solid Refresh during development, and build client and server bundles for server-side rendering.
 
+<p>
+  <a href="https://npmjs.com/package/@rsbuild/plugin-solid"><img src="https://img.shields.io/npm/v/@rsbuild/plugin-solid?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="MIT license" /></a>
+  <a href="https://npmcharts.com/compare/@rsbuild/plugin-solid?minimal=true"><img src="https://img.shields.io/npm/dm/@rsbuild/plugin-solid.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="Monthly npm downloads" /></a>
+</p>
+
 ## Quick start
 
 To create a new app, run `npm create rsbuild@latest` and select **Solid**. To add the plugin to an existing Rsbuild app that uses Solid 2, install it as a dev dependency.
