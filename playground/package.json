@@ -5,6 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "rs build",
-    "dev": "rs dev"
+    "dev": "rs dev",
+    "preview": "rs preview"
+  },
+  "dependencies": {
+    "@solidjs/web": "^2.0.3",
+    "solid-js": "^2.0.3"
   }
 }

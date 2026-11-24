@@ -198,7 +198,14 @@ importers:
         specifier: ^7.0.2
         version: 7.0.2
 
-  playground: {}
+  playground:
+    dependencies:
+      '@solidjs/web':
+        specifier: ^2.0.3
+        version: 2.0.3(solid-js@2.0.3)
+      solid-js:
+        specifier: ^2.0.3
+        version: 2.0.3
 
 packages:
 
