@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "jsxImportSource": "@solidjs/web"
+  },
+  "include": ["src"]
+}

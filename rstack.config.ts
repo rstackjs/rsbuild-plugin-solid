@@ -1,9 +1,14 @@
 // Configuration guide: https://rstack.rs/config
+import { definePlaywrightConfig } from '@rstest/playwright/config';
 import { define } from 'rstack';
 
 define.lib({
   dts: true,
   syntax: 'es2023',
+});
+
+define.test({
+  extends: definePlaywrightConfig({}),
 });
 
 define.fmt({
