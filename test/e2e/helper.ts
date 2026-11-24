@@ -30,7 +30,7 @@ export const test = base.extend<{
   run: Run;
 }>({
   cwd: async ({ task }, use) => {
-    const parent = path.join(import.meta.dirname, '../test-results');
+    const parent = path.join(import.meta.dirname, '../../test-results');
     await mkdir(parent, { recursive: true });
     const cwd = await mkdtemp(path.join(parent, 'solid-'));
     try {

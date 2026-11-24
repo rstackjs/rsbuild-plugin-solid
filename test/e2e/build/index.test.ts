@@ -1,5 +1,5 @@
 import { pluginSolid } from '@rsbuild/plugin-solid';
-import { expect, test } from './helper.ts';
+import { expect, test } from '../helper.ts';
 
 test('should build basic solid component properly', async ({ page, run }) => {
   const rsbuild = await run('preview', {
