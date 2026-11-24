@@ -41,44 +41,133 @@ export default defineConfig({
 });
 ```
 
+## Resolution behavior
+
+The Solid plugin adds `solid` to Rsbuild's [resolve.conditionNames](https://rsbuild.rs/config/resolve/condition-names). This allows package exports to resolve Solid-specific entries when they are available.
+
+In development mode, the plugin also adds `development` to resolve Solid's development runtime and enables development-only compiler transforms. You can disable both behaviors with [`dev: false`](#dev).
+
+If you configure `resolve.conditionNames`, the plugin preserves your configured values and prepends these Solid conditions.
+
 ## Options
 
-Pass options to `pluginSolid()` in your Rsbuild config. The following options apply to version 2.
+To customize the compilation behavior of Solid, use the following options.
 
-### `compiler`
+### compiler
 
-Selects the JSX compiler. The default is `'native'`. To compile JSX with `@solidjs/babel-plugin`, use `pluginSolid({ compiler: 'babel' })`.
+The JSX compiler backend. The native compiler is used by default. Set this option to `'babel'` to compile JSX with `@solidjs/babel-plugin` instead.
 
-### `extensions`
-
-The plugin compiles `.jsx`, `.tsx`, `.mjsx`, `.cjsx`, `.mtsx`, and `.ctsx` by default. To compile other extensions as JSX and enable Solid Refresh for them, pass an array of extensions with their leading dots.
+- **Type:** `'native' | 'babel'`
+- **Default:** `'native'`
+- **Version:** `>= 2.0.0`
+- **Example:**
 
 ```ts
-pluginSolid({ extensions: ['.solid'] });
+pluginSolid({
+  compiler: 'babel',
+});
 ```
 
-Import these files with the extension, for example `import App from './App.solid'`. To allow extensionless imports, also add `.solid` to Rsbuild's `resolve.extensions`.
+### extensions
 
-### `dev`
+The plugin supports `.jsx`, `.tsx`, `.mjsx`, `.cjsx`, `.mtsx`, and `.ctsx` files by default. If your project uses other file extensions, add them to `extensions`. Include the leading dot, as in `.solid`.
 
-Controls Solid's development runtime and development-only compiler transforms. It defaults to `true` in development mode and `false` in production mode.
+- **Type:** `string[]`
+- **Default:** `[]`
+- **Version:** `>= 2.0.0`
+- **Example:**
 
-The plugin prepends `solid` to Rsbuild's `resolve.conditionNames` so packages can provide Solid-specific exports. When `dev` is enabled, it also adds `development` after `solid`. Both take precedence over the configured conditions, which retain their relative order.
+```ts
+pluginSolid({
+  extensions: ['.solid'],
+});
+```
 
-### `refresh`
+With this configuration, the plugin compiles `.solid` files as JavaScript with JSX and supports Solid Refresh for those files during development.
 
-Solid Refresh runs for web targets when HMR is enabled during development.
+When importing files like `App.mtsx` or `App.solid`, include the extension, as in `import App from './App.solid'`. To omit an extension in imports, add it to Rsbuild's [resolve.extensions](https://rsbuild.rs/config/resolve/extensions).
 
-- Set `refresh.disabled` to `true` to turn off Solid Refresh while keeping Rsbuild HMR active. Defaults to `false`.
-- `refresh.granular` defaults to `true`. It emits per-component metadata so that only components whose code changed are remounted on an edit.
+### dev
 
-### `ssr`
+Whether to enable Solid's development runtime and development-only compiler transforms. Set it to `false` to disable both behaviors in development mode, or set it to `true` to enable them in production mode.
 
-Set `ssr: true` to compile JSX for server rendering on Node.js targets and for DOM hydration on web targets. It defaults to `false`. See the [SSR fixture](./test/e2e/ssr) for the server entry, client entry, and Rsbuild configuration.
+If `solid.dev` is explicitly configured, it overrides the `dev` setting for compiler transforms without affecting runtime resolution.
 
-### `solid`
+- **Type:** `boolean`
+- **Default:** `true` in development mode, `false` in production mode
+- **Example:**
 
-Pass a `SolidPresetOptions` object to override the options sent to the JSX compiler, including `generate`, `hydratable`, and `dev`. For example, `solid.dev` affects compiler transforms independently of which runtime the top-level `dev` option selects.
+```ts
+pluginSolid({
+  dev: false,
+});
+```
+
+### refresh.disabled
+
+Whether to disable Solid Refresh for HMR in development mode. This only controls the refresh transform and does not disable Rsbuild HMR.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Example:**
+
+```ts
+pluginSolid({
+  refresh: {
+    disabled: true,
+  },
+});
+```
+
+### refresh.granular
+
+Whether to emit per-component metadata so edits only remount components whose code changed.
+
+- **Type:** `boolean`
+- **Default:** `true`
+- **Version:** `>= 2.0.0`
+- **Example:**
+
+```ts
+pluginSolid({
+  refresh: {
+    granular: false,
+  },
+});
+```
+
+### ssr
+
+Whether to generate output for Solid SSR. When enabled, the plugin uses `generate: 'ssr'` and `hydratable: true` for Node.js targets, and uses `generate: 'dom'` and `hydratable: true` for other targets.
+
+Values in [`solid`](#solid) will override these defaults.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Example:**
+
+```ts
+pluginSolid({
+  ssr: true,
+});
+```
+
+### solid
+
+Options passed to the Solid JSX compiler through [solid-loader](https://github.com/rstackjs/solid-loader#solid).
+
+- **Type:** `SolidPresetOptions`
+- **Default:** `{}`
+- **Example:**
+
+```ts
+pluginSolid({
+  solid: {
+    generate: 'ssr',
+    hydratable: true,
+  },
+});
+```
 
 ## License
 
