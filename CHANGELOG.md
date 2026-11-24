@@ -1,5 +1,7 @@
 # @rsbuild/plugin-solid
 
+This changelog is no longer updated, so check [GitHub Releases](https://github.com/rstackjs/rsbuild-plugin-solid/releases) for changes in newer versions.
+
 ## 2.1.0 (2026-11-19)
 
 ### Refactor
