@@ -26,6 +26,9 @@
     "prepare": "rs hooks",
     "test": "rs test"
   },
+  "dependencies": {
+    "solid-loader": "^1.0.1"
+  },
   "devDependencies": {
     "@rsbuild/core": "^2.3.2",
     "@rstackjs/test-utils": "^1.0.0",
@@ -36,7 +39,9 @@
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
-    "@rsbuild/core": "^2.0.0"
+    "@rsbuild/core": "^2.0.0",
+    "@solidjs/web": "^2.0.0",
+    "solid-js": "^2.0.0"
   },
   "peerDependenciesMeta": {
     "@rsbuild/core": {
