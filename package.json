@@ -1,6 +1,6 @@
 {
   "name": "@rsbuild/plugin-solid",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Solid plugin for Rsbuild",
   "repository": "https://github.com/rstackjs/rsbuild-plugin-solid",
   "license": "MIT",
